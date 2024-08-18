@@ -29,4 +29,16 @@ public class NotesController {
     public Notesdto notesdto(@RequestBody Notesdto notesdto) {
         return notesService.save(notesdto);
     }
+
+    @DeleteMapping("/{id}")
+    public List<Notesdto> deleteNote(@PathVariable Long id) {
+        return notesService.deleteById(id);
+    }
+
+    @GetMapping("/{id}")
+    public Notesdto findById(@PathVariable Long id) {
+        return notesService.findById(id);
+    }
+
+
 }

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class NoteService {
@@ -35,5 +36,17 @@ public class NoteService {
         newNote.setContent(notesdto.getContent());
         Note savedNote = notesRepo.save(newNote);
         return new Notesdto(savedNote.getId(), savedNote.getContent());
+    }
+
+    public List<Notesdto> deleteById(Long id) {
+        Optional<Note> optionalNote = notesRepo.findById(id);
+        optionalNote.ifPresent(notesRepo::delete);
+        return getNotes();
+    }
+
+    public Notesdto findById(Long id) {
+        Optional<Note> optionalNote = notesRepo.findById(id);
+        return optionalNote.map(note -> new Notesdto(note.getId(), note.getContent())).orElse(null);
+
     }
 }
