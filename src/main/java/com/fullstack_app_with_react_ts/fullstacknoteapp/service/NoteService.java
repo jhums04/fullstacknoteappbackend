@@ -49,4 +49,8 @@ public class NoteService {
         return optionalNote.map(note -> new Notesdto(note.getId(), note.getContent())).orElse(null);
 
     }
+
+    public String testMethod() {
+        return "test string";
+    }
 }
